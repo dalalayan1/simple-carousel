@@ -1,0 +1,20 @@
+.carousel {
+	width: 1000px;
+	height: 600px;
+	margin: 40px auto;
+	background-color: lightcyan;
+}
+
+.frame {
+	max-height: 100%;	
+	width: 100%;
+	display: none;												
+}
+
+.btn-section {
+	text-align: center;
+}
+
+.display-block {
+	display:  block;
+}
