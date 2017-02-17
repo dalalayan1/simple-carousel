@@ -5,23 +5,56 @@ var carousel = carousel || {};
 	var frames = document.getElementsByClassName('frame');
 	var currFrame = 0;
 	var noOfFrames = frames.length-1;
+	var paused = false;
 	var prevBtn = document.getElementsByClassName('prev-btn')[0];
 	var nextBtn = document.getElementsByClassName('next-btn')[0];
 
-	prevBtn.addEventListener('click',checkFrame('prev'));
-	nextBtn.addEventListener('click',checkFrame('next'));
+	prevBtn.addEventListener('click',checkFrame);
+	nextBtn.addEventListener('click',checkFrame);
 
-	function checkFrame(flag){
-		//e.preventDefault();
-		if(currFrame>=0 && currFrame<noOfFrames){
-			displayFrame(currFrame,flag);
+	var slideShow = window.setInterval(function(){
+		checkFrame();
+	},2000);
+
+
+	function checkFrame(e){
+		if(e){
+			e.preventDefault();
+			var btnType = e.target.classList[0];
+			//clearInterval(slideShow);
+		}
+		
+
+			if(!btnType && currFrame==noOfFrames){
+				currFrame=0;
+			}
+			else if(!btnType){
+				currFrame++;
+			}
+			else if(currFrame==0 && btnType=='prev-btn'){
+				currFrame=noOfFrames;
+			}
+			else if(currFrame==noOfFrames && btnType=='next-btn'){
+			currFrame = 0;
+			}
+			else if(btnType=='next-btn'){
+				currFrame++;
+			}
+			else if(btnType=='prev-btn'){
+				currFrame--;
+			}
+			
+		
+
+		if(currFrame>=0 && currFrame<=noOfFrames){
+			displayFrame(currFrame);
 		}
 		else{
 			throw new Error('Invalid frame number');
 		}
 	}
 
-	function displayFrame(active,flag){
+	function displayFrame(active){
 		for(var i=0;i<=noOfFrames;i++){
 			if(i==active){
 				frames[i].classList.add('display-block')
@@ -33,19 +66,11 @@ var carousel = carousel || {};
 				
 			}
 		}
-		if(flag=='prev'){
-			currFrame--;
-			if(currFrame==0){
-				currFrame=noOfFrames;
-			}
-			
-		}
-		else{
-			currFrame++;
-			if(currFrame==noOfFrames){
-			currFrame = 0;
-			}
-		}
+		//resumeSlideShow();
+
 	}
+
+	
+
 
 })();
