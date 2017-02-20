@@ -17,7 +17,8 @@ var carousel = carousel || {};
 	carousel.addEventListener('mouseout',resumeCarousel);
 	document.addEventListener("keydown",checkKey);
 
-	function checkKey(e){
+	function checkKey(e){    //to check if the keypress is anyone of right arrow or left arrow
+
 		if(e.which==37 || e.which==39){
 			e.preventDefault();
 			checkFrame(e);
@@ -25,11 +26,12 @@ var carousel = carousel || {};
 		return;
 	}
 
-	var slideShow = window.setInterval(function(){
+	var slideShow = window.setInterval(function(){   //setting interval for the slideshow
 		checkFrame();
 	},2000);
 
-	function pauseCarousel(e){
+	function pauseCarousel(e){   //pause the slideshow
+
 		if(e){
 			e.preventDefault();
 		}
@@ -40,12 +42,13 @@ var carousel = carousel || {};
 		
 	}
 
-	function resumeCarousel(e){
+	function resumeCarousel(e){   //resume the slideshow
+
 		if(e){
 			e.preventDefault();
 		}
 		else{
-			flag = 0;
+			flag = 0;        
 		}
 		slideShow = window.setInterval(function(){
 						checkFrame();
@@ -54,7 +57,8 @@ var carousel = carousel || {};
 	}
 
 
-	function checkFrame(e){
+	function checkFrame(e){    //check whether the frame no. is valid else throw error
+
 		if(e){
 			e.preventDefault();
 			pauseCarousel();
@@ -98,7 +102,8 @@ var carousel = carousel || {};
 		}
 	}
 
-	function displayFrame(active){
+	function displayFrame(active){      //toggle the frames by adding & removing a class
+
 		for(var i=0;i<=noOfFrames;i++){
 			if(i==active){
 				frames[i].classList.add('display-block')
@@ -110,7 +115,8 @@ var carousel = carousel || {};
 				
 			}
 		}
-		if(flag==1){
+		if(flag==1){       //flag to check if carousel is paused
+
 			resumeCarousel();
 		}
 
