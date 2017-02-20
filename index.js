@@ -4,7 +4,7 @@ var carousel = carousel || {};
 
 	var frames = document.getElementsByClassName('frame');
 	var carousel = document.getElementsByClassName('carousel')[0];
-	var currFrame = 1;
+	var currFrame = 0;
 	var noOfFrames = frames.length-1;
 	var paused = false;
 	var flag = 0;
@@ -15,6 +15,7 @@ var carousel = carousel || {};
 	nextBtn.addEventListener('click',checkFrame);
 	carousel.addEventListener('mouseover',pauseCarousel);
 	carousel.addEventListener('mouseout',resumeCarousel);
+	document.addEventListener("keydown",checkFrame);
 
 	var slideShow = window.setInterval(function(){
 		checkFrame();
@@ -53,22 +54,28 @@ var carousel = carousel || {};
 		}
 		
 		
-			if(!btnType && currFrame==noOfFrames){
+			if(!e && currFrame==noOfFrames){
 				currFrame=0;
 			}
-			else if(!btnType){
+			else if(!e){
 				currFrame++;
 			}
 			else if(currFrame==0 && btnType=='prev-btn'){
 				currFrame=noOfFrames;
 			}
+			else if(currFrame==0 && e.which==37){
+				currFrame=noOfFrames;
+			}
 			else if(currFrame==noOfFrames && btnType=='next-btn'){
 			currFrame = 0;
 			}
-			else if(btnType=='next-btn'){
+			else if(currFrame==noOfFrames && e.which==39){
+			currFrame = 0;
+			}
+			else if(btnType=='next-btn' || e.which==39){
 				currFrame++;
 			}
-			else if(btnType=='prev-btn'){
+			else if(btnType=='prev-btn' || e.which==37){
 				currFrame--;
 			}
 			
