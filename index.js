@@ -15,7 +15,15 @@ var carousel = carousel || {};
 	nextBtn.addEventListener('click',checkFrame);
 	carousel.addEventListener('mouseover',pauseCarousel);
 	carousel.addEventListener('mouseout',resumeCarousel);
-	document.addEventListener("keydown",checkFrame);
+	document.addEventListener("keydown",checkKey);
+
+	function checkKey(e){
+		if(e.which==37 || e.which==39){
+			e.preventDefault();
+			checkFrame(e);
+		}
+		return;
+	}
 
 	var slideShow = window.setInterval(function(){
 		checkFrame();
@@ -50,6 +58,7 @@ var carousel = carousel || {};
 		if(e){
 			e.preventDefault();
 			pauseCarousel();
+			console.log(e.which);
 			var btnType = e.target.classList[0];
 		}
 		
