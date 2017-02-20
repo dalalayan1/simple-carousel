@@ -1,18 +1,38 @@
+h1 {
+	text-align: center;
+}
+
 .carousel {
 	width: 1000px;
 	height: 600px;
 	margin: 40px auto;
 	background-color: lightcyan;
+	position: relative;
 }
 
 .frame {
 	max-height: 100%;	
 	width: 100%;
-	display: none;												
+	display: none;
+	cursor: pointer;												
 }
 
-.btn-section {
-	text-align: center;
+button {
+	position: absolute;
+	cursor: pointer;
+	background: transparent;
+    border: none;
+    outline: none;
+}
+
+.prev-btn {
+    top: 292px;
+}
+
+.next-btn {
+    top: 292px;
+    right: 0px;
+    
 }
 
 .display-block {
